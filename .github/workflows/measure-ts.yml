@@ -139,7 +139,7 @@ jobs:
           # exit code. --timeout 90000 gives headroom for slow fs/spawn tests.)
           SUBPROCESS_PATHS="test/cli/acp/ test/cli/smokes/ test/cli/serve/ test/cli/run/run-process.test.ts test/cli/mcp-add.test.ts test/cli/help/help-snapshots.test.ts test/cli/auth-login-cancel.test.ts"
 
-          OPENCODE_SKIP_SUBPROCESS=1 bun test --timeout 90000 > /tmp/test-main.txt 2>&1 || true
+          OPENCODE_SKIP_SUBPROCESS=1 bun test --parallel --timeout 90000 > /tmp/test-main.txt 2>&1 || true
           bun test --timeout 90000 --max-concurrency=2 $SUBPROCESS_PATHS > /tmp/test-sub.txt 2>&1 || true
           echo "===== MAIN SUITE ====="; cat /tmp/test-main.txt
           echo "===== SUBPROCESS SUITE (bounded) ====="; cat /tmp/test-sub.txt
